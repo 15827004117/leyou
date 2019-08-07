@@ -14,4 +14,5 @@ import lombok.NoArgsConstructor;
 public class LyException extends RuntimeException {
 
     private ExceptionEnum exceptionEnum;
+
 }
