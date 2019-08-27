@@ -10,6 +10,7 @@ import com.leyou.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -69,5 +70,18 @@ public class BrandService {
                 throw new LyException(ExceptionEnum.CATEGORY_BRAND_SAVE_ERROR);
             }
         }
+    }
+
+    /**
+     * 根据id查询品牌
+     * @param brandId
+     * @return
+     */
+    public Brand queryById(Long brandId) {
+        Brand brand = brandMapper.selectByPrimaryKey(brandId);
+        if(brand == null) {
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOND);
+        }
+        return brand;
     }
 }

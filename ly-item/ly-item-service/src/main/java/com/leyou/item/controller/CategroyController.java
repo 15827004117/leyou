@@ -5,10 +5,7 @@ import com.leyou.item.service.CategroyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +16,11 @@ public class CategroyController {
     @Autowired
     private CategroyService categroyService;
 
+    /**
+     * 查看商品列表
+     * @param pid
+     * @return
+     */
     @GetMapping("list")
     public ResponseEntity<List<Category>> queryCategroyListByParentId(@RequestParam(value = "pid", defaultValue = "0") Long pid) {
         List<Category> list = categroyService.queryCategoryListByParentId(pid);
@@ -27,5 +29,17 @@ public class CategroyController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
             return ResponseEntity.ok(list);
+    }
+
+    /**
+     * 根据品牌id查询商品分类
+     */
+    @GetMapping("bid/{bid}")
+    public ResponseEntity<List<Category>> queryByBrandId(@PathVariable(value = "bid") Long bid) {
+        List<Category> list = this.categroyService.queryByBrandId(bid);
+        if (list == null || list.size() < 1) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(list);
     }
 }
