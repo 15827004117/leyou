@@ -2,6 +2,7 @@ package com.leyou.item.vo;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -13,13 +14,25 @@ public class SpuVo {
 
     private Long id;
     private Long brandId;
-    private Long cid1;// 1级类目
-    private Long cid2;// 2级类目
-    private Long cid3;// 3级类目
-    private String title;// 标题
-    private String subTitle;// 子标题
-    private Boolean saleable;// 是否上架
-    private Date createTime;// 创建时间
+    /**1级类目*/
+    private Long cid1;
+    /**2级类目*/
+    private Long cid2;
+    /**3级类目*/
+    private Long cid3;
+    /**标题*/
+    private String title;
+    /**子标题*/
+    private String subTitle;
+    /**是否上架*/
+    private Integer saleable;
+    /**创建时间*/
+    private Date createTime;
+
+    /**商品分类名称*/
+    @Transient
     private String cname;
+    /**品牌名称*/
+    @Transient
     private String bname;
 }

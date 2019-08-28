@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
+/**
+ * @author lijing
+ */
 public interface BrandMapper extends Mapper<Brand> {
 
     /**

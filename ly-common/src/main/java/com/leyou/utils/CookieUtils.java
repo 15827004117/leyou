@@ -11,9 +11,8 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
- * 
  * Cookie 工具类
- *
+ * @author lijing
  */
 public final class CookieUtils {
 
@@ -21,7 +20,6 @@ public final class CookieUtils {
 
 	/**
 	 * 得到Cookie的值, 不编码
-	 * 
 	 * @param request
 	 * @param cookieName
 	 * @return
@@ -32,7 +30,6 @@ public final class CookieUtils {
 
 	/**
 	 * 得到Cookie的值,
-	 * 
 	 * @param request
 	 * @param cookieName
 	 * @return
@@ -62,7 +59,6 @@ public final class CookieUtils {
 
 	/**
 	 * 得到Cookie的值,
-	 * 
 	 * @param request
 	 * @param cookieName
 	 * @return
@@ -142,10 +138,11 @@ public final class CookieUtils {
 				cookieValue = URLEncoder.encode(cookieValue, "utf-8");
 			}
 			Cookie cookie = new Cookie(cookieName, cookieValue);
-			if (cookieMaxage > 0)
-				cookie.setMaxAge(cookieMaxage);
-			if (null != request)// 设置域名的cookie
-				cookie.setDomain(getDomainName(request));
+			if (cookieMaxage > 0){
+				cookie.setMaxAge(cookieMaxage);}
+			// 设置域名的cookie
+			if (null != request) {
+				cookie.setDomain(getDomainName(request)); }
 			cookie.setPath("/");
 			response.addCookie(cookie);
 		} catch (Exception e) {
@@ -167,10 +164,13 @@ public final class CookieUtils {
 				cookieValue = URLEncoder.encode(cookieValue, encodeString);
 			}
 			Cookie cookie = new Cookie(cookieName, cookieValue);
-			if (cookieMaxage > 0)
+			if (cookieMaxage > 0) {
 				cookie.setMaxAge(cookieMaxage);
-			if (null != request)// 设置域名的cookie
+			}
+			// 设置域名的cookie
+			if (null != request) {
 				cookie.setDomain(getDomainName(request));
+			}
 			cookie.setPath("/");
 			response.addCookie(cookie);
 		} catch (Exception e) {
@@ -185,7 +185,7 @@ public final class CookieUtils {
 		String domainName = null;
 
 		String serverName = request.getRequestURL().toString();
-		if (serverName == null || serverName.equals("")) {
+		if (serverName == null || "".equals(serverName)) {
 			domainName = "";
 		} else {
 			serverName = serverName.toLowerCase();
@@ -205,7 +205,7 @@ public final class CookieUtils {
 			}
 		}
 
-		if (domainName != null && domainName.indexOf(":") > 0) {
+		if (domainName.indexOf(":") > 0) {
 			String[] ary = domainName.split("\\:");
 			domainName = ary[0];
 		}

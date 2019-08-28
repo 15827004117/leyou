@@ -7,10 +7,15 @@ import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
-public interface CategroyMapper extends Mapper<Category>, IdListMapper<Category, Long> {
+/**
+ * @author lijing
+ */
+public interface CategoryMapper extends Mapper<Category>, IdListMapper<Category, Long> {
 
     /**
-     * 根据品牌id查询商品分类
+     * 查询
+     * @param bid
+     * @return
      */
     @Select("SELECT * FROM tb_category WHERE id IN (SELECT category_id FROM tb_category_brand WHERE brand_id = #{bid})")
     List<Category> queryByBrandId(Long bid);

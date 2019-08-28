@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * 图片上传
+ * @author Administrator
+ */
 @RestController
 @RequestMapping("upload")
 public class UploadController {
@@ -20,7 +24,7 @@ public class UploadController {
     @PostMapping("image")
     public ResponseEntity<String> uploadImage(@RequestParam("file")MultipartFile file) {
         String url = uploadService.upload(file);
-        if(url == null && "".equals(url)) {
+        if(url == null) {
             // url为空，证明上传失败
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

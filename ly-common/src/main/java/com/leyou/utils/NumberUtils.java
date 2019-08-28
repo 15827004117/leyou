@@ -25,7 +25,7 @@ public class NumberUtils {
      * @return
      */
     public static boolean isDigit(String str){
-        if(str == null || str.trim().equals("")){
+        if(str == null || "".equals(str.trim())){
             return false;
         }
         return str.matches("^\\d+$");
@@ -42,7 +42,7 @@ public class NumberUtils {
         return bd.setScale(scale, RoundingMode.HALF_UP).doubleValue();
     }
 
-    // 从字符串中根据正则表达式寻找，返回找到的数字数组
+    /**从字符串中根据正则表达式寻找，返回找到的数字数组*/
     public static Double[] searchNumber(String value, String regex){
         List<Double> doubles = new ArrayList<>();
         Pattern pattern = Pattern.compile(regex);

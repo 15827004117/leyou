@@ -1,4 +1,4 @@
-package com.leyou.exceptionHandler;
+package com.leyou.exceptionhandler;
 
 import com.leyou.exception.LyException;
 import com.leyou.vo.ExceptionResult;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * 统一异常处理类
+ * @author Administrator
  */
 @ControllerAdvice
 public class CommonExceptionHandler {

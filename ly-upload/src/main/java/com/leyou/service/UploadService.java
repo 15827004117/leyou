@@ -15,17 +15,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * 图片上传
+ * @author lijing
+ */
 @Slf4j
 @Service
 public class UploadService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UploadController.class); // 日志
+    /** 日志 */
+    private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
-    // 支持的文件类型
+    /** 支持的文件类型 */
     private static final List<String> SUFFIXES = Arrays.asList("image/png", "image/jpeg");
 
-    //图片上传
+    /** 图片上传 */
     public String upload(MultipartFile file) {
         try {
             // 文件类型效验
@@ -38,7 +44,7 @@ public class UploadService {
                 throw new LyException(ExceptionEnum.INVALID_FILE_ERROR);
             }
             // 保存的路径
-            File path = new File("D:\\upload", file.getOriginalFilename());
+            File path = new File("D:\\upload", Objects.requireNonNull(file.getOriginalFilename()));
             // 保存至本地磁盘
             file.transferTo(path);
             // 返回路径

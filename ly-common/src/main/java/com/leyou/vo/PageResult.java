@@ -5,11 +5,15 @@ import java.util.List;
 /**
  * 分页返回封装类
  * @param <T>
+ * @author lijing
  */
 public class PageResult<T> {
-    private Long total;// 总条数
-    private Long totalPage;// 总页数
-    private List<T> items;// 当前页数据
+    /** 总条数 */
+    private Long total;
+    /** 总页数 */
+    private Long totalPage;
+    /** 当前页数据 */
+    private List<T> items;
 
     public PageResult() {
     }

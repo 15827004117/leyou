@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 异常处理结果
+ * @author lijing
  */
 @Data
 public class ExceptionResult {

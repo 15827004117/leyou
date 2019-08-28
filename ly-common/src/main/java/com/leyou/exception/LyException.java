@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * ly异常
+ * 统一异常
+ * @author lijing
  */
 @Getter
 @NoArgsConstructor

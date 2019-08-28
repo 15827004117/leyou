@@ -10,11 +10,13 @@ import com.leyou.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
+/**
+ * @author lijing
+ */
 @Service
 public class BrandService {
 
@@ -55,7 +57,7 @@ public class BrandService {
      * @param brand
      * @param cids
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveBrand(Brand brand, List<Integer> cids) {
         // 新增品牌
         brand.setId(null);

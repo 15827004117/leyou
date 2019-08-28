@@ -7,7 +7,6 @@ import com.leyou.item.pojo.Specification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 
 /**
@@ -16,7 +15,6 @@ import org.springframework.util.CollectionUtils;
  * @date 2019/8/23 11:15
  */
 @Service
-@Transactional
 public class SpecificationService {
 
     @Autowired
@@ -25,6 +23,7 @@ public class SpecificationService {
     /**
      * 根据id查询规格参数
      */
+    @Transactional(rollbackFor = Exception.class)
     public Specification queryById(Long cid) {
         Specification specification = specificationMapper.selectByPrimaryKey(cid);
         if(specification == null) {

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author lijing
+ */
 @RestController
 @RequestMapping("brand")
 public class BrandController {

@@ -9,7 +9,6 @@ import com.leyou.item.mapper.SpuMapper;
 import com.leyou.item.pojo.Brand;
 import com.leyou.item.pojo.Category;
 import com.leyou.item.pojo.Spu;
-import com.leyou.item.pojo.SpuDetail;
 import com.leyou.vo.PageResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ import java.util.stream.Collectors;
  * @date 2019/8/27 10:46
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class GoodsService {
 
     @Autowired
@@ -37,7 +36,7 @@ public class GoodsService {
     private SpuDetailMapper spuDetailMapper;
 
     @Autowired
-    private CategroyService categroyService;
+    private CategoryService categoryService;
 
     @Autowired
     private BrandService brandService;
@@ -85,7 +84,7 @@ public class GoodsService {
     private void loadCategoryAndBrandName(List<Spu> list) {
         for (Spu spu : list) {
             // 处理分类名称
-            List<String> names = categroyService.queryNameByIds(
+            List<String> names = categoryService.queryNameByIds(
                     Arrays.asList(spu.getCid1(), spu.getCid2(), spu.getCid3()))
                     .stream().map(Category::getName).collect(Collectors.toList());
             spu.setCname(StringUtils.join(names, "/"));
