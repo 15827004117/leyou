@@ -49,6 +49,62 @@ public enum  ExceptionEnum {
      * 商品分类不存在
      */
     CATEGORY_NOT_FOND(404, "商品分类不存在"),
+    /**
+     * SPU详情不存在
+     */
+    SPU_DETAIL_NOT_FOUND(404, "SPU详情不存在"),
+    /**
+     *商品SKU不存在
+     */
+    GOODS_SKU_NOT_FOUND(404, "商品SKU不存在"),
+    /**
+     * 商品不存在
+     */
+    GOODS_NOT_FOUND(404, "商品不存在"),
+    /**
+     *规格参数不存在
+     */
+    GROUP_PARAM_NOT_FOUND(404, "规格参数不存在"),
+    /**
+     *商品规格添加失败
+     */
+    SPEC_GROUP_CREATE_FAILED(500, "商品规格添加失败"),
+    /**
+     *ID参数错误
+     */
+    INVALID_PARAM(500,"ID参数错误"),
+    /**
+     * 删除商品规格租失败
+     */
+    DELETE_SPEC_GROUP_FAILED(500,"删除商品规格组失败"),
+    /**
+     *修改商品规格租失败
+     */
+    UPDATE_SPEC_GROUP_FAILED(500,"修改商品规格租失败"),
+    /**
+     *新增商品规格租失败
+     */
+    SPEC_PARAM_CREATE_FAILED(500,"新增商品规格租失败"),
+    /**
+     *"修改商品规格参数失败
+     */
+    UPDATE_SPEC_PARAM_FAILED(500,"修改商品规格参数失败"),
+    /**
+     *删除商品规格参数失败
+     */
+    DELETE_SPEC_PARAM_FAILED(500,"删除商品规格参数失败"),
+    /**
+     *规格组不存在
+     */
+    GROUP_NOT_FOUND(404,"规格组不存在"),
+    /**
+     *
+     */
+    BRAND_NOT_FOUND(404, "品牌不存在"),
+    /**
+     *
+     */
+    SPU_NOT_FOUND(404,"spu不存在"),
     ;
 
     /**

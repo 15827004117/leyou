@@ -10,8 +10,10 @@ import com.leyou.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -85,5 +87,26 @@ public class BrandService {
             throw new LyException(ExceptionEnum.BRAND_NOT_FOND);
         }
         return brand;
+    }
+
+    /**
+     * 根据分类查询品牌
+     * @param cid
+     * @return
+     */
+    public List<Brand> queryByCid(Long cid) {
+        List<Brand> list = brandMapper.queryByCategoryId(cid);
+        if(CollectionUtils.isEmpty(list)) {
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOND);
+        }
+        return list;
+    }
+
+    public List<Brand> queryBrandByIds(List<Long> ids) {
+        List<Brand> list = brandMapper.selectByIdList(ids);
+        if (CollectionUtils.isEmpty(list)) {
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return list;
     }
 }

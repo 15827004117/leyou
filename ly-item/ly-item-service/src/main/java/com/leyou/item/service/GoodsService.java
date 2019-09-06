@@ -4,11 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leyou.enums.ExceptionEnum;
 import com.leyou.exception.LyException;
+import com.leyou.item.mapper.SkuMapper;
 import com.leyou.item.mapper.SpuDetailMapper;
 import com.leyou.item.mapper.SpuMapper;
-import com.leyou.item.pojo.Brand;
-import com.leyou.item.pojo.Category;
-import com.leyou.item.pojo.Spu;
+import com.leyou.item.pojo.*;
 import com.leyou.vo.PageResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +40,9 @@ public class GoodsService {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    private SkuMapper skuMapper;
+
     /**
      *  分页查询商品列表
      * @param page
@@ -49,7 +51,7 @@ public class GoodsService {
      * @param key
      * @return
      */
-    public Object querySpuByPage(Integer page, Integer rows, Boolean saleable, String key) {
+    public PageResult<Spu> querySpuByPage(Integer page, Integer rows, Boolean saleable, String key) {
         // 分页条件
         PageHelper.startPage(page, rows);
         // 创建过滤条件
@@ -92,5 +94,38 @@ public class GoodsService {
             Brand brand = brandService.queryById(spu.getBrandId());
             spu.setBname(brand.getName());
         }
+    }
+
+    public SpuDetail querySpuDetailById(Long id) {
+        SpuDetail spuDetail = spuDetailMapper.selectByPrimaryKey(id);
+        if (spuDetail == null) {
+            throw new LyException(ExceptionEnum.SPU_DETAIL_NOT_FOUND);
+        }
+        return spuDetail;
+    }
+
+    public List<Sku> querySkusBySpuId(Long id) {
+        Sku sku = new Sku();
+        sku.setSpuId(id);
+        List<Sku> skus = skuMapper.select(sku);
+        if (CollectionUtils.isEmpty(skus)) {
+            throw new LyException(ExceptionEnum.GOODS_SKU_NOT_FOUND);
+        }
+        return skus;
+    }
+
+    public Spu querySpuById(Long id) {
+        Spu spu = spuMapper.selectByPrimaryKey(id);
+        if (spu == null) {
+            throw new  LyException(ExceptionEnum.SPU_NOT_FOUND);
+        }
+        // 查询sku
+        List<Sku> skus = querySkusBySpuId(id);
+        spu.setSkus(skus);
+
+        // 查询detail
+        SpuDetail spuDetail = querySpuDetailById(id);
+        spu.setSpuDetail(spuDetail);
+        return spu;
     }
 }

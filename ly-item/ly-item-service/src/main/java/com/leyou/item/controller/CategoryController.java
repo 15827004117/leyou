@@ -14,7 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("category")
-public class CategroyController {
+public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
@@ -44,5 +44,10 @@ public class CategroyController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("list/ids")
+    public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids") List<Long> ids) {
+        return  ResponseEntity.ok(categoryService.queryByIds(ids));
     }
 }
