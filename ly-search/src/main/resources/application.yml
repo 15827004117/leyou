@@ -9,6 +9,11 @@ spring:
       cluster-nodes: 47.93.61.140:9300
   jackson:
     default-property-inclusion: non_null # 配置json处理时忽略空值
+  rabbitmq:
+    host: 47.93.61.140
+    username: leyou
+    password: leyou
+    virtual-host: /
 eureka:
   client:
     service-url:

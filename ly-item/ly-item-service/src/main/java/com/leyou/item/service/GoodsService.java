@@ -9,7 +9,12 @@ import com.leyou.item.mapper.SpuDetailMapper;
 import com.leyou.item.mapper.SpuMapper;
 import com.leyou.item.pojo.*;
 import com.leyou.vo.PageResult;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +47,11 @@ public class GoodsService {
 
     @Autowired
     private SkuMapper skuMapper;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsService.class);
 
     /**
      *  分页查询商品列表
@@ -127,5 +137,14 @@ public class GoodsService {
         SpuDetail spuDetail = querySpuDetailById(id);
         spu.setSpuDetail(spuDetail);
         return spu;
+    }
+
+    private void sendMessage(Long id, String type){
+        // 发送消息
+        try {
+            this.amqpTemplate.convertAndSend("item." + type, id);
+        } catch (Exception e) {
+            LOGGER.error("{}商品消息发送异常，商品id：{}", type, id, e);
+        }
     }
 }

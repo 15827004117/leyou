@@ -98,13 +98,17 @@ public enum  ExceptionEnum {
      */
     GROUP_NOT_FOUND(404,"规格组不存在"),
     /**
-     *
+     *品牌不存在
      */
     BRAND_NOT_FOUND(404, "品牌不存在"),
     /**
-     *
+     *spu不存在
      */
     SPU_NOT_FOUND(404,"spu不存在"),
+    /**
+     *用户请求参数错误
+     */
+    INVALID_USER_DATA_TYPE_ERROR(400, "用户请求参数错误")
     ;
 
     /**

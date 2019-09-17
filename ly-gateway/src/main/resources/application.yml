@@ -18,6 +18,7 @@ zuul:
   routes:
     item-service: /item/** # 将商品微服务映射到/item/**
     search-service: /search/** # 将搜索微服务映射到/item/**
+    user-service: /user/** #将用户服务映射到/user/**
     upload-service:        # 将文件上传微服务映射到/upload/**
       path: /upload/**
       serviceId: upload-service

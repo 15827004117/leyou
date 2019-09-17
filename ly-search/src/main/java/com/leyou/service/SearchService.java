@@ -26,6 +26,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -193,6 +194,28 @@ public class SearchService {
         List<Goods> goodsList = pageInfo.getContent();
         // 7.封装结果并返回
         return new PageResult<>(total, totalPage, goodsList);
+    }
+
+    /**
+     *  创建索引
+     * @param id
+     * @throws Exception
+     */
+    public void createIndex(Long id) throws Exception {
+        Spu spu = this.goodsClient.querySpuById(id);
+        // 构建商品
+        Goods goods = this.buildGoods(spu);
+
+        // 保存数据到索引库
+        this.goodsRepository.save(goods);
+    }
+
+    /**
+     * 删除索引
+     * @param id
+     */
+    public void deleteIndex(Long id) {
+        this.goodsRepository.deleteById(id);
     }
 
 }
