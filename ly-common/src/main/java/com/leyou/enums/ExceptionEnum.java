@@ -108,7 +108,27 @@ public enum  ExceptionEnum {
     /**
      *用户请求参数错误
      */
-    INVALID_USER_DATA_TYPE_ERROR(400, "用户请求参数错误")
+    INVALID_USER_DATA_TYPE_ERROR(400, "用户请求参数错误"),
+    /**
+     * 用户短信验证码错误
+     */
+    USER_CHECK_CODE_ERROR(400,"用户短信验证码错误"),
+    /**
+     * 用户不存在
+     */
+    INVALID_USERNAME_PASSWORD(400,"用户不存在"),
+    /**
+     *用户凭证生成失败
+     */
+    CREATE_TOKEN_ERROR(500,"用户凭证生成失败"),
+    /**
+     *验证用户信息失败
+     */
+    INTERNAL_SERVER_ERROR(500,"验证用户信息失败"),
+    /**
+     * 未授权
+     */
+    UNAUTHORIZED(403,"未授权"),
     ;
 
     /**

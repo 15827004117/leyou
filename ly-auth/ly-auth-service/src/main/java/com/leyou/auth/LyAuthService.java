@@ -1,20 +1,19 @@
-package com.leyou.user;
-
+package com.leyou.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import tk.mybatis.spring.annotation.MapperScan;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author 李静
- * @date 2019/9/16 15:25
+ * @date 2019/9/18 14:05
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com.leyou.user.mapper")
-public class LyUserService {
+@EnableFeignClients
+public class LyAuthService {
     public static void main(String[] args) {
-        SpringApplication.run(LyUserService.class,args);
+        SpringApplication.run(LyAuthService.class, args);
     }
 }

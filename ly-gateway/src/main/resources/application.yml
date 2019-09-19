@@ -19,11 +19,14 @@ zuul:
     item-service: /item/** # 将商品微服务映射到/item/**
     search-service: /search/** # 将搜索微服务映射到/item/**
     user-service: /user/** #将用户服务映射到/user/**
+    auth-service: /auth/** #将授权服务映射到/auth/**
     upload-service:        # 将文件上传微服务映射到/upload/**
       path: /upload/**
       serviceId: upload-service
       strip-prefix: false
   ignored-services: upload-service # 忽略upload-service服务
+  add-host-header: true # 携带请求本身的header信息
+  sensitive-headers: #配置禁止使用头信息,这里设置为null,否则set-cookie无效
 
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)
